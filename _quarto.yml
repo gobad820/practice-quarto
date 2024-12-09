@@ -1,0 +1,22 @@
+project:
+  type: manuscript
+
+manuscript:
+  article: NBA_2023-24_v2.ipynb
+
+format:
+  pdf:
+    # documentclass: scrreprt
+    documentclass: article
+    # documentclass: report 
+    # documentclass: book
+    papersize: a4
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    colorlinks: true
+    include-in-header:
+      text: |
+        \usepackage{kotex}
+
+bibliography: references.bib
