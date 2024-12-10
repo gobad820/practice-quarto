@@ -2,13 +2,13 @@ project:
   type: manuscript
 
 manuscript:
-  article: NBA_2023-24_v2.ipynb
+  article: NBA_2023-24.ipynb
 
 format:
   pdf:
     # documentclass: scrreprt
     documentclass: article
-    # documentclass: report 
+    # documentclass: report
     # documentclass: book
     papersize: a4
     toc: true
@@ -20,3 +20,4 @@ format:
         \usepackage{kotex}
 
 bibliography: references.bib
+notebook-links: false

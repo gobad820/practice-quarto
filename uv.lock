@@ -991,21 +991,17 @@ name = "practice-pandoc"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
-    { name = "ipykernel" },
     { name = "jupyterlab" },
     { name = "matplotlib" },
     { name = "pandas" },
-    { name = "pyyaml" },
     { name = "scikit-learn" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "ipykernel", specifier = ">=6.29.5" },
     { name = "jupyterlab", specifier = ">=4.3.2" },
     { name = "matplotlib", specifier = ">=3.9.3" },
     { name = "pandas", specifier = ">=2.2.3" },
-    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "scikit-learn", specifier = ">=1.5.2" },
 ]
 
