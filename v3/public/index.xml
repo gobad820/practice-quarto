@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on </title>
+    <link>/</link>
+    <description>Recent content in Home on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 14 Aug 2024 14:56:57 +0900</lastBuildDate>
+    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Wed, 14 Aug 2024 14:56:57 +0900</pubDate>
+      <guid>/about/</guid>
+      <description>&lt;p&gt;Minim voluptate nostrud amet elit est est occaecat. Laborum laboris occaecat ut nostrud irure aliquip. Mollit aliquip sint tempor ad enim labore cupidatat Lorem minim commodo qui voluptate eu minim. Consectetur et culpa ad excepteur exercitation nostrud eiusmod amet.&lt;/p&gt;&#xA;&lt;p&gt;Irure ea anim sunt duis occaecat id proident commodo tempor culpa voluptate eiusmod. Sunt dolor ex ut excepteur aliqua eu est ex qui. Ut sit minim ex aute quis pariatur elit aliqua cillum.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>My First Post</title>
+      <link>/posts/my-first-post/</link>
+      <pubDate>Wed, 14 Aug 2024 14:56:57 +0900</pubDate>
+      <guid>/posts/my-first-post/</guid>
+      <description>&lt;p&gt;Ut dolor ea dolor magna reprehenderit reprehenderit et Lorem minim amet labore proident. Aliquip anim sint reprehenderit commodo aliqua. Dolore commodo adipisicing amet occaecat aliquip id eiusmod elit ea. Occaecat deserunt nulla officia et reprehenderit occaecat est cillum duis.&lt;/p&gt;&#xA;&lt;p&gt;Id cupidatat sint laboris incididunt minim. Sit irure veniam consequat nostrud. Enim cupidatat incididunt adipisicing occaecat laboris et sunt anim elit laborum labore elit dolor. Excepteur sint voluptate laboris excepteur esse ea ut laborum aute aliquip id culpa.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
