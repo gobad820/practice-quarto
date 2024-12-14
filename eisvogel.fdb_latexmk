@@ -1,0 +1,18 @@
+# Fdb version 4
+["pdflatex"] 1734197022.53492 "c:/Users/sigma/works/practice-quarto/eisvogel.tex" "eisvogel.pdf" "eisvogel" 1734197022.8969 2
+  "$if(beamer)$$documentclass$$else$$if(book)$scrbook$else$scrartcl$endif$$endif$.cls" 0 -1 0 ""
+  "c:/Users/sigma/works/practice-quarto/eisvogel.tex" 1734197021 32962 b65df5f21277b77e754191b17e11432e ""
+  "c:/texlive/2024/texmf-dist/tex/latex/hyperref/hyperref.sty" 1733758529 222112 c22dbd2288f89f7ba942ac22f7d00f11 ""
+  "c:/texlive/2024/texmf-dist/tex/latex/url/url.sty" 1727179067 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
+  "c:/texlive/2024/texmf-dist/tex/latex/xcolor/xcolor.sty" 1730036436 55384 b454dec21c2d9f45ec0b793f0995b992 ""
+  "c:/texlive/2024/texmf-dist/tex/xelatex/xecjk/xeCJK.sty" 1727179123 183137 ed372550124703b2b73cbcc0b47cb20f ""
+  "c:/texlive/2024/texmf-dist/web2c/texmf.cnf" 1728320491 42021 a58d36c7ede3d2fc9f93da62d691ddff ""
+  "c:/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1733759873 3343615 5c1278b6ac9afc10af7a460270dc6645 ""
+  "c:/texlive/2024/texmf.cnf" 1727179179 713 e69b156964470283e0530f5060668171 ""
+  "eisvogel.aux" 1734197022 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "eisvogel.tex" 1734197021 32962 b65df5f21277b77e754191b17e11432e ""
+  (generated)
+  "eisvogel.aux"
+  "eisvogel.log"
+  "eisvogel.pdf"
+  (rewritten before read)
