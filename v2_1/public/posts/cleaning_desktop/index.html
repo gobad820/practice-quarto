@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+<link rel="icon" type="image/ico" href="https://gobad820.github.io//favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://gobad820.github.io//favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://gobad820.github.io//favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://gobad820.github.io//android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://gobad820.github.io//apple-touch-icon.png">
+
+<meta name="description" content="An LSM Tree overview and Java implementation."/>
+
+<title>
+    
+    바탕화면 정리 | Pelikan&#39;s Glide
+    
+</title>
+
+<link rel="canonical" href="https://gobad820.github.io/posts/cleaning_desktop/"/>
+
+<meta property="og:url" content="https://gobad820.github.io/posts/cleaning_desktop/">
+  <meta property="og:site_name" content="Pelikan&#39;s Glide">
+  <meta property="og:title" content="바탕화면 정리">
+  <meta property="og:description" content="An LSM Tree overview and Java implementation.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-01-07T00:00:00+00:00">
+    <meta property="article:tag" content="Cpp">
+    <meta property="article:tag" content="Algorithm">
+    <meta property="article:tag" content="Programmers">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.0b9a6e1845daa80b0277a7b7755520c9143589ec95518f88ceeefa0bd1473bd4.css" media="all">
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+
+
+
+  </head>
+
+  
+
+  
+  
+  
+
+  <body class="auto">
+
+    <div class="content">
+      <header>
+        
+
+<div class="header">
+
+    
+
+    <h1 class="header-title">
+        <a href="https://gobad820.github.io/">Pelikan&#39;s Glide</a>
+    </h1>
+
+    <div class="flex">
+        
+
+        
+        
+      
+        <p class="small ">
+            <a href="/" >
+                /home
+            </a>
+        </p>
+        
+      
+        <p class="small ">
+            <a href="/posts" >
+                /posts
+            </a>
+        </p>
+        
+      
+        <p class="small ">
+            <a href="/about" >
+                /about
+            </a>
+        </p>
+        
+        
+    </div>
+
+    
+
+</div>
+
+      </header>
+
+      <main class="main">
+        
+
+
+
+
+
+<div class="breadcrumbs">
+    
+    <a href="/">Home</a>
+    <span class="breadcrumbs-separator"> > </span>
+    
+    <a href="/posts/">Posts</a>
+    <span class="breadcrumbs-separator"> > </span>
+    
+    <a class="breadcrumbs-current" href="/posts/cleaning_desktop/">바탕화면 정리</a>
+</div>
+
+
+
+<div  class="autonumber" >
+
+  <div class="single-intro-container">
+
+    
+
+    <h1 class="single-title">바탕화면 정리</h1>
+    
+    <p class="single-summary">바탕화면의 파일들을 한 번에 삭제하기 위해 최소한의 이동거리를 갖는 드래그의 시작점과 끝점을 담은 정수 배열을 반환하라</p>
+    
+
+    
+
+    <p class="single-readtime">
+      
+      
+      
+      <time datetime="2025-01-07T00:00:00&#43;00:00">January 7, 2025</time>
+      
+
+      
+      &nbsp; · &nbsp;
+      4 min read
+      
+    </p>
+
+  </div>
+
+  
+
+  
+
+  
+  <aside class="toc">
+    <p><strong>Table of contents</strong></p>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#problem-statement">Problem statement</a></li>
+    <li><a href="#problem-dividing">Problem Dividing</a></li>
+    <li><a href="#problem-solving">Problem Solving</a>
+      <ul>
+        <li><a href="#stringtointwallpaper">stringToIntWallpaper</a></li>
+        <li><a href="#findstartposition">findStartPosition</a></li>
+        <li><a href="#findlastposition">findLastPosition</a></li>
+        <li><a href="#emplaceposition">emplacePosition</a></li>
+      </ul>
+    </li>
+    <li><a href="#code-refactoring">Code Refactoring</a></li>
+  </ul>
+</nav>
+  </aside>
+  
+
+  
+
+  <div class="single-content">
+    <h2 class="heading" id="problem-statement">
+  Problem statement
+  <a href="#problem-statement">#</a>
+</h2>
+<p>컴퓨터 바탕화면은 각 칸이 정사각형인 격자판입니다. 이때 컴퓨터 바탕화면의 상태를 나타낸 문자열 배열 wallpaper가 주어집니다. 파일들은 바탕화면의 격자칸에 위치하고 바탕화면의 격자점들은 바탕화면의 가장 왼쪽 위를 (0, 0)으로 시작해 (세로 좌표, 가로 좌표)로 표현합니다. 빈칸은 &ldquo;.&rdquo;, 파일이 있는 칸은 &ldquo;#&rdquo; 의 값을 가집니다. 드래그를 하면 파일들을 선택할 수 있고, 선택된 파일들을 삭제할 수 있습니다. 머쓱이는 최소한의 이동거리를 갖는 한 번의 드래그로 모든 파일을 선택해서 한 번에 지우려고 하며 드래그로 파일들을 선택하는 방법은 다음과 같습니다.</p>
+<ul>
+<li>드래그는 바탕화면의 격자점 S(lux, luy)를 마우스 왼쪽 버튼으로 클릭한 상태로 격자점 E(rdx, rdy)로 이동한 뒤 마우스 왼쪽 버튼을 떼는 행동입니다. 이때, &ldquo;점 S에서 점 E로 드래그한다&quot;고 표현하고 점 S와 점 E를 각각 드래그의 시작점, 끝점이라고 표현합니다.</li>
+<li>점 S(lux, luy)에서 점 E(rdx, rdy)로 드래그를 할 때, &ldquo;드래그 한 거리&quot;는 |rdx - lux| + |rdy - luy|로 정의합니다.</li>
+<li>점 S에서 점 E로 드래그를 하면 바탕화면에서 두 격자점을 각각 왼쪽 위, 오른쪽 아래로 하는 직사각형 내부에 있는 모든 파일이 선택됩니다.</li>
+</ul>
+<p>머쓱이의 컴퓨터 바탕화면의 상태를 나타내는 문자열 배열 <code>wallpaper</code>가 매개변수로 주어질 때 바탕화면의 파일들을 한 번에 삭제하기 위해 최소한의 이동거리를 갖는 드래그의 시작점과 끝점을 담은 정수 배열을 return하는 solution 함수를 작성해 주세요. 드래그의 시작점이 (lux, luy), 끝점이 (rdx, rdy)라면 정수 배열 [lux, luy, rdx, rdy]를 return하면 됩니다.</p>
+<h2 class="heading" id="problem-dividing">
+  Problem Dividing
+  <a href="#problem-dividing">#</a>
+</h2>
+<p>문제의 해결을 위해 4가지 단계를 생각했다.</p>
+<ol>
+<li><code>std::vector&lt;std::vector&lt;int&gt;&gt;</code> 타입으로 테이블 변경하기</li>
+<li>시작점(S) 구하기</li>
+</ol>
+<ul>
+<li>최좌측 위치 구하기</li>
+<li>최상단 위치 구하기</li>
+</ul>
+<ol start="3">
+<li>종착점(E) 구하기</li>
+</ol>
+<ul>
+<li>최우측 위치 구하기</li>
+<li>최하단 위치 구하기</li>
+</ul>
+<ol start="4">
+<li>시작점과 종착점을 answer에 넣기</li>
+</ol>
+<h2 class="heading" id="problem-solving">
+  Problem Solving
+  <a href="#problem-solving">#</a>
+</h2>
+<blockquote>
+<p>최대한 문제를 잘게 나누고 가독성을 위해 함수를 작성하였다.</p>
+</blockquote>
+<pre tabindex="0"><code>std::vector&lt;std::vector&lt;int&gt;&gt;  stringToIntWallpaper(std::vector&lt;std::string&gt; wallpaper);
+std::pair&lt;int, int&gt; findStartPosition(std::vector&lt;std::vector&lt;int&gt;&gt; wallpaper);
+std::pair&lt;int, int&gt; findLastPosition(std::vector&lt;std::vector&lt;int&gt;&gt; wallpaper);
+void emplacePosition(std::vector&lt;int&gt;&amp; answer, std::pair&lt;int, int&gt; position);
+</code></pre><h3 class="heading" id="stringtointwallpaper">
+  stringToIntWallpaper
+  <a href="#stringtointwallpaper">#</a>
+</h3>
+<p>문제에서 제공되는 <code>std::vector&lt;std::string&gt; wallpaper</code>를 <code>std::vector&lt;std::vector&lt;int&gt;&gt; wallpaper</code>로 변경하기 위한 함수였다.</p>
+<blockquote>
+<p>하지만 문제를 푸는데 있어서 위의 함수는 굳이 필요하지 않았다!
+무의미한 함수였지만 일단은 기술하였고 마지막에 이 함수 없이 푸는 코드를 따로 올리겠다.</p>
+</blockquote>
+<pre tabindex="0"><code>std::vector&lt;std::vector&lt;int&gt;&gt; stringToIntWallpaper(std::vector&lt;std::string&gt; wallpaper){
+    std::vector&lt;std::vector&lt;int&gt;&gt; int_wallpaper;
+    for(const auto line: wallpaper){
+        std::vector&lt;int&gt; temp_vector;
+        for(const auto sector: line){
+            if(sector == &#39;#&#39;){
+            	temp_vector.emplace_back(1);   
+            }else{
+                temp_vector.emplace_back(0);
+            }
+        }
+       	int_wallpaper.emplace_back(temp_vector); 
+    }
+    return int_wallpaper;
+}
+</code></pre><p>string으로 이루어져 있는 .와 #의 집합을 0과 1로 이루어진 wallpaper로 변경하였다.
+한 줄씩 반복하면서 #이 나오면 1을 .이 나오면 0을 입력하였다.</p>
+<h3 class="heading" id="findstartposition">
+  findStartPosition
+  <a href="#findstartposition">#</a>
+</h3>
+<pre tabindex="0"><code>std::pair&lt;int, int&gt; findStartPosition(std::vector&lt;std::vector&lt;int&gt;&gt; wallpaper){
+    bool left_flag = false;
+    bool top_flag = false;
+    int most_left = 0;
+    int most_top = 0;
+    for(int x = 0 ; x &lt; wallpaper[0].size() ; x++){
+        for(int y = 0 ; y &lt; wallpaper.size() ; y++){
+           if(wallpaper[y][x] == 1){
+               most_left = x;
+               left_flag = true;
+               break;
+           } 
+        }
+        if(left_flag) break;
+    }
+    for(int y = 0 ; y &lt; wallpaper.size() ; y++){
+        for(const auto item : wallpaper[y]){
+            if(item == 1){
+                most_top = y;
+                top_flag = true;
+                break;
+            }
+        }
+        if(top_flag) break;
+    }
+    return {most_top, most_left};
+} 
+</code></pre><p>최좌상단의 값을 찾기 위해 (0,0)위치에서 반복문을 통해 우하단으로 내려가도록 하였다.
+이 때 계속 값이 업데이트되지 않게 하기 위해서 break와 flag를 통해 값이 들어오면 바로 멈출 수 있도록 하였다.</p>
+<h3 class="heading" id="findlastposition">
+  findLastPosition
+  <a href="#findlastposition">#</a>
+</h3>
+<pre tabindex="0"><code>std::pair&lt;int, int&gt; findLastPosition(std::vector&lt;std::vector&lt;int&gt;&gt; wallpaper){
+    int most_right = 0;
+    int most_bottom = 0;
+    for(int x = 0 ; x &lt; wallpaper[0].size() ; x++){
+        for(int y = 0 ; y &lt; wallpaper.size() ; y++){
+           if(wallpaper[y][x] == 1){
+               most_right = x;
+           } 
+        }
+    }
+    for(int y = 0 ; y &lt; wallpaper.size() ; y++){
+        for(const auto item : wallpaper[y]){
+            if(item == 1){
+                most_bottom = y;
+            }
+        }
+    }
+    return {most_bottom+1, most_right+1};
+}
+</code></pre><p><code>findStartPosition</code>함수와 다르게 stop하지 않고 계속 순회하면서 모든 순회가 끝날 때 즉 가장 나중에 update된 최우하단의 값을 넣는다
+또한 드래그는 각 섹션의 우측 하단의 값을 넣게 되므로 위치에 각각 1을 더해준다.</p>
+<h3 class="heading" id="emplaceposition">
+  emplacePosition
+  <a href="#emplaceposition">#</a>
+</h3>
+<pre tabindex="0"><code>void emplacePosition(std::vector&lt;int&gt;&amp; answer, std::pair&lt;int, int&gt; position){
+	answer.emplace_back(position.first);
+    answer.emplace_back(position.second);
+}
+</code></pre><p>vector를 reference로 전달하여 원본에 vector에 position들을 추가할 수 있도록 하였다.</p>
+<h2 class="heading" id="code-refactoring">
+  Code Refactoring
+  <a href="#code-refactoring">#</a>
+</h2>
+<blockquote>
+<p>정답을 맞춘 뒤 프로그래머스에서 제공하는 다른 사람의 코드를 참고하여 리팩토링을 하여 코드의 완성도를 높인다.</p>
+</blockquote>
+<p><strong>개선점</strong></p>
+<ol>
+<li>굳이 2중 int 벡터로 바꾸어야 했을까?</li>
+<li>starting point와 end point를 굳이 따로 순회하면서 찾아야 했을까?</li>
+</ol>
+<p>위의 개선점들을 생각해볼 수 있었다.
+이를 개선하기 위해서 다른 사람들의 코드를 비교해보며 나의 코드의 문제점을 찾아나가보겠다.</p>
+<p>wallpaper의 경우 <code>std::vector&lt;std::string&gt;</code>을 그대로 사용해도 무리가 없을것 같다. 그러므로 <code>stringToIntWallpaper</code> 함수는 제거한다.</p>
+<p>Starting point와 End point를 구하는 경우 앞의 함수를 설명하면서 순회하며 업데이트한다. 즉 최좌측값은 x의 값이 가장 작으면서 #인 경우, 최상단의 값은 y값이 가장 작으면서 #인 경우가 된다.
+이와 같이 End point의 경우 x값이 가장 크면서 #인 경우이며 최하단의 경우 y값이 가장 크면서 #인 경우에 각각 +1을 해주면 된다.</p>
+<p>따라서 아래와 같이 코드를 다시 작성할 수 있었다.</p>
+<pre tabindex="0"><code>#include &lt;bits/stdc++.h&gt;
+
+std::vector&lt;int&gt; solution(std::vector&lt;std::string&gt; wallpaper) {
+    // 상 좌 하 우
+    std::vector&lt;int&gt; answer {100,100,-100,-100};
+    for(auto i = 0 ; i &lt; wallpaper.size() ; i++){
+        for(auto j = 0 ; j &lt; wallpaper[0].size() ; j++){
+            if(wallpaper[i][j] == &#39;#&#39;){
+                answer[0] = std::min(answer[0],i); // 최상점
+                answer[1] = std::min(answer[1],j); // 최좌점
+                answer[2] = std::max(answer[2],i); // 최하점
+                answer[3] = std::max(answer[3],j); // 최우점
+                
+            }
+        }
+    }
+    answer[2]++;
+    answer[3]++;
+    return answer;
+}
+</code></pre><p>결국 x축과 y축의 값을 계속 업데이트 하되 최저점과 최고점을 나누어 따로 업데이트를 시키면 되는 것이었다.
+2중 for문 한번으로 상하좌우의 최소, 최댓값을 모두 찾아내고 이를 이용하여 드래그의 시작점과 드래그의 끝점을 구할 수 있었다.</p>
+
+    
+  </div>
+
+  
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+      </main>
+    </div>
+
+    <footer>
+      
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+    </footer>
+
+    
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+<script defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+
+<script defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ]
+    });
+  });
+</script>
+    
+
+  </body>
+
+  <script>
+
+  function isAuto() {
+    return document.body.classList.contains("auto");
+  }
+
+  function setTheme() {
+    if (!isAuto()) {
+      return
+    }
+
+    document.body.classList.remove("auto");
+    let cls = "light";
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      cls = "dark";
+    }
+
+    document.body.classList.add(cls);
+  }
+
+  function invertBody() {
+    document.body.classList.toggle("dark");
+    document.body.classList.toggle("light");
+  }
+
+  if (isAuto()) {
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(invertBody);
+  }
+
+  setTheme();
+
+</script>
+
+</html>
