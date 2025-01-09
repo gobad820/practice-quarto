@@ -6,8 +6,15 @@
     <description>Recent content in Home on Pelikan&#39;s Glide</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Jan 2025 00:17:11 +0900</lastBuildDate>
     <atom:link href="https://gobad820.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP</title>
+      <link>https://gobad820.github.io/posts/http/</link>
+      <pubDate>Fri, 10 Jan 2025 00:17:11 +0900</pubDate>
+      <guid>https://gobad820.github.io/posts/http/</guid>
+      <description>모든 것이 HTTP</description>
+    </item>
     <item>
       <title>바탕화면 정리</title>
       <link>https://gobad820.github.io/posts/cleaning_desktop/</link>

@@ -1,0 +1,6 @@
+[submodule "v2_1/themes/hugo-cite"]
+	path = v2_1/themes/hugo-cite
+	url = https://github.com/loup-brun/hugo-cite.git
+[submodule "v2_1/themes/hugo-simplecite"]
+	path = v2_1/themes/hugo-simplecite
+	url = https://github.com/joksas/hugo-simplecite

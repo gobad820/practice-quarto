@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-us"
+  dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+
+<link rel="icon" type="image/ico" href="https://gobad820.github.io//favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://gobad820.github.io//favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://gobad820.github.io//favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://gobad820.github.io//android-chrome-192x192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://gobad820.github.io//apple-touch-icon.png">
+
+<meta name="description" content="HTTP"/>
+
+<title>
+    
+    HTTP | Pelikan&#39;s Glide
+    
+</title>
+
+<link rel="canonical" href="https://gobad820.github.io/posts/http/"/>
+
+<meta property="og:url" content="https://gobad820.github.io/posts/http/">
+  <meta property="og:site_name" content="Pelikan&#39;s Glide">
+  <meta property="og:title" content="HTTP">
+  <meta property="og:description" content="HTTP">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-10T00:17:11+09:00">
+    <meta property="article:modified_time" content="2025-01-10T00:17:11+09:00">
+    <meta property="article:tag" content="HTTP">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/assets/combined.min.d0a03d941a925d1390aafde5d5313a897731121cdd80b68c1cbdc8a46009356d.css" media="all">
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+
+
+
+  </head>
+
+  
+
+  
+  
+  
+
+  <body class="auto">
+
+    <div class="content">
+      <header>
+        
+
+<div class="header">
+
+    
+
+    <h1 class="header-title">
+        <a href="https://gobad820.github.io/">Pelikan&#39;s Glide</a>
+    </h1>
+
+    <div class="flex">
+        
+
+        
+        
+      
+        <p class="small ">
+            <a href="/" >
+                /home
+            </a>
+        </p>
+        
+      
+        <p class="small ">
+            <a href="/posts" >
+                /posts
+            </a>
+        </p>
+        
+      
+        <p class="small ">
+            <a href="/about" >
+                /about
+            </a>
+        </p>
+        
+        
+    </div>
+
+    
+
+</div>
+
+      </header>
+
+      <main class="main">
+        
+
+
+
+
+
+<div class="breadcrumbs">
+    
+    <a href="/">Home</a>
+    <span class="breadcrumbs-separator"> > </span>
+    
+    <a href="/posts/">Posts</a>
+    <span class="breadcrumbs-separator"> > </span>
+    
+    <a class="breadcrumbs-current" href="/posts/http/">HTTP</a>
+</div>
+
+
+
+<div  class="autonumber" >
+
+  <div class="single-intro-container">
+
+    
+
+    <h1 class="single-title">HTTP</h1>
+    
+    <p class="single-summary">모든 것이 HTTP</p>
+    
+
+    
+
+    <p class="single-readtime">
+      
+      
+      
+      <time datetime="2025-01-10T00:17:11&#43;09:00">January 10, 2025</time>
+      
+
+      
+      &nbsp; · &nbsp;
+      5 min read
+      
+    </p>
+
+  </div>
+
+  
+
+  
+  
+
+  <div class="single-tags">
+    
+    <span>
+      <a href="https://gobad820.github.io/tags/http/">#HTTP</a>
+    </span>
+    
+    
+  </div>
+
+  
+  
+
+  
+
+  
+  <aside class="toc">
+    <p><strong>Table of contents</strong></p>
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#http-역사">HTTP 역사</a></li>
+    <li><a href="#기반-프로토콜">기반 프로토콜</a></li>
+    <li><a href="#http-특징">HTTP 특징</a>
+      <ul>
+        <li><a href="#클라이언트-서버-구조">클라이언트 서버 구조</a></li>
+        <li><a href="#stateless">Stateless</a></li>
+        <li><a href="#비연결성">비연결성</a></li>
+        <li><a href="#http-메시지">HTTP 메시지</a></li>
+        <li><a href="#http-헤더">HTTP 헤더</a></li>
+        <li><a href="#http-메세지-바디">HTTP 메세지 바디</a></li>
+      </ul>
+    </li>
+    <li><a href="#정리">정리</a></li>
+  </ul>
+</nav>
+  </aside>
+  
+
+  
+
+  <div class="single-content">
+    <blockquote>
+<p>현대 시대는 모든 것을 HTTP 메시지에 담아 전송한다.</p>
+<p>HTML, TEXT, IMAGE, 음성, 영상, 파일, JSON, XML &hellip;</p>
+<p>거의 모든 형태의 데이터 전송이 가능하며 서버간 데이터를 주고 받을 때도 대부분 HTTP를 사용한다.</p>
+</blockquote>
+<h2 class="heading" id="http-역사">
+  HTTP 역사
+  <a href="#http-%ec%97%ad%ec%82%ac">#</a>
+</h2>
+<ul>
+<li>HTTP/0.9 1991년: GET 메서드만 지원, HTTP 헤더 없음</li>
+<li>HTTP/1.0 1996년: 메서드, 헤더 추가</li>
+<li>HTTP/1.1 1997년: 가장 많이 사용되며 가장 중요하다
+<ul>
+<li>RFC2068(1997) $\rightarrow$ RFC2616(1999) $\rightarrow$ RFC7230~7235(2014)</li>
+<li>1.1 이후는 모두 성능 개선 위주의 변화</li>
+</ul>
+</li>
+<li>HTTP/2 2015년: 성능 개선</li>
+<li>HTTP/3 진행중: TCP 대신 UDP 사용, 성능 개선</li>
+</ul>
+<h2 class="heading" id="기반-프로토콜">
+  기반 프로토콜
+  <a href="#%ea%b8%b0%eb%b0%98-%ed%94%84%eb%a1%9c%ed%86%a0%ec%bd%9c">#</a>
+</h2>
+<ul>
+<li>TCP: HTTP/1.1, HTTP/2</li>
+<li>UDP: HTTP/3</li>
+</ul>
+<p>현재는 HTTP/1.1을 주로 사용하지만 2, 3버전도 점점 증가하고 있다.</p>
+<h2 class="heading" id="http-특징">
+  HTTP 특징
+  <a href="#http-%ed%8a%b9%ec%a7%95">#</a>
+</h2>
+<blockquote>
+<p>HTTP는 아래의 4가지의 특징을 가지고 있다.</p>
+</blockquote>
+<h3 class="heading" id="클라이언트-서버-구조">
+  클라이언트 서버 구조
+  <a href="#%ed%81%b4%eb%9d%bc%ec%9d%b4%ec%96%b8%ed%8a%b8-%ec%84%9c%eb%b2%84-%ea%b5%ac%ec%a1%b0">#</a>
+</h3>
+<p>클라이언트와 서버를 분리함으로 비즈니스 로직과 데이터들은 서버에 넣고 클라이언트는 UI, UX 등과 같은 사용성에 집중한다.
+이를 통해 클라이언트와 서버가 각각 독립적으로 진화될 수 있다. 사용자의 경험성을 높이기 위해서는 클라이언트를 집중적으로 향상시키면 되는 것이고 서버 트래픽을 더 잘 처리하기 위해서는 서버를 조금 더 고도화 하여
+분리하여 개발할 수 있게 한다.</p>
+<p>아주 간단하게 설명하자면 클라이언트는 서버에 요청을 보내고 응답을 대기한다. 서버는 요청에 대한 결과를 만들어 응답을 다시 클라이언트로 보내준다.</p>
+<pre class="mermaid">graph LR
+    Client[Client]
+    Server[Server]
+    Database[Database]
+    Client -->|Sends Request| Server
+    Server -->|Fetches Data| Database
+    Database -->|Returns Data| Server
+    Server -->|Sends Response| Client
+</pre>
+<h3 class="heading" id="stateless">
+  Stateless
+  <a href="#stateless">#</a>
+</h3>
+<p><strong>Stateless는 서버가 클라이언트의 상태를 보존하지 않는다는 것이다.</strong>
+이와 달리 Stateful의 경우 클라이언트의 상태를 유지한다. Stateful의 경우 서버가 클라이언트를 기억하고 정보를 갖고 있으므로 클라이언트 입장에서는 편한 이용이 가능하다.</p>
+<p>무상태, stateless의 경우 아래와 같은 대화를 예로 들 수 있다.</p>
+<blockquote>
+<p>C: 이 노트북 얼마인가요?</p>
+<p>S_1: 100만원입니다.</p>
+<p>C: 노트북 2개 구매하겠습니다.</p>
+<p>S_2: 노트북 2개는 200만원 입니다. 카드, 현금 중 어떻게 구매하시겠어요?</p>
+<p>C: 노트북 2개를 카드로 구매하겠습니다.</p>
+<p>S_3: 200만원 결제 완료되었습니다.</p>
+</blockquote>
+<p>이처럼 모든 Request마다 서버(점원)가 바뀌어도 아무런 문제가 없이 요청을 하고 있다.
+마지막 요청인 &lsquo;노트북 2개를 카드로 구매하겠습니다.&lsquo;를 통해서 어떠한 클라이언트의 사전 정보 필요 없이도 클라이언트가 원하는 요청을 들어줄 수 있다.
+그러므로 고객이 급속도로 증가해도 서버를 대거 투입하여 관리할 수 있다.(문맥이 필요 없으므로) 만약 Satetful 정책을 취한다면 클라이언트마다 서버를 서로 중계하여야 하며 해당 서버가 오류가 나면 문맥이 다
+소실되어 처음부터 다시 시작해야 한다는 단점이 있다.
+sateless의 경우 중계 서버가 클라이언트에 따라 특정 서버를 중계하는 것이 아닌 무작위로 서버를 연결하여도 정상 작동하므로 확장성이 매우 증대된다.</p>
+<p><strong>Stateless의 한계</strong></p>
+<p>모든 것을 무상태로 설계할 수는 없다. 로그인 기능이 있따면 서버는 클라이언트가 로그인 상태가 유지되도록 해 주어야 한다. 그렇기 때문에 100% stateless로 할 수는 없다.
+하지만 상태 정보의 경우 최소한으로만 유지해야 하며 될 수 있으면 stateless를 유지해야 한다.</p>
+<h3 class="heading" id="비연결성">
+  비연결성
+  <a href="#%eb%b9%84%ec%97%b0%ea%b2%b0%ec%84%b1">#</a>
+</h3>
+<pre class="mermaid">graph LR
+    Client1[Client1] <-->|Request / Response| Server
+    Client2[Client2] <-->|Request / Response| Server
+    Client3[Client3] <-->|Request / Response| Server
+</pre>
+<p>위의 그래프는 모든 클라이언트들이 서버와 통신하지 않고 있어도 계속 연결을 유지하고 있다.
+따라서 idle 상태에서도 서버 유지 하는 자원이 많아진다.</p>
+<p>하지만 아래와 같이 비연결성을 유지한다면 자원을 아끼면서 빠른 속도로 통신할 수 있다.
+아래의 그래프는 Client2만 연결을 하고 있기 때문에 연결이 유지되어 있지만 나머지 클라이언트는 연결을 유지하지 않고 있다.</p>
+<pre class="mermaid">graph LR
+    Client1[Client1]
+    Client2[Client2] <-->|Request / Response| Server
+    Client3[Client3]
+</pre>
+<p><strong>비연결성의 장점</strong></p>
+<ul>
+<li>서버 자원의 효율적 사용</li>
+<li>빠른 속도 보장</li>
+<li>HTTP 기본이 연결을 유지하지 않는 모델 채택</li>
+</ul>
+<p><strong>비연결성의 한계</strong></p>
+<ul>
+<li>TCP/IP 연결을 새로 맺어야 함
+<ul>
+<li>3 way handshake 시간이 추가 된다.
+<ul>
+<li>3 way handshake는 TCP(Transmission Control Protocol) 연결을 설정하기 위한 과정으로 클라이언트와 서버 간 신뢰할 수 있는 연결을 성립하기 위해 사용된다.</li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid">    sequenceDiagram
+    participant Client
+    participant Server
+
+    Client->>Server: SYN (seq=x)
+    Server->>Client: SYN-ACK (seq=y, ack=x+1)
+    Client->>Server: ACK (seq=x+1, ack=y+1)
+</pre>
+<ul>
+<li>웹 브라우저로 사이트를 요청한다면 Javascript, css, 추가 이미지 등 수많은 리소스가 동시에 다운로드 된다.</li>
+<li>현재는 HTTP 지속 연결(PErsistent Connections)로 문제 해결</li>
+<li>HTTP/2, HTTP/3 에서 더 많은 최적화</li>
+</ul>
+</li>
+</ul>
+<p><strong>Persistent Connections</strong></p>
+<pre class="mermaid">sequenceDiagram
+participant Client
+participant Server
+        
+  Client->Server: Connection(0.1sec)
+  Server->Client: Request/ HTML Response(0.1sec)
+  Client->Server: Close(0.1sec)
+
+  Client->Server: Connection(0.1sec)
+  Server->Client: Request/ JavaScript Response(0.1sec)
+  Client->Server: Close(0.1sec)
+
+  Client->Server: Connection(0.1sec)
+  Server->Client: Request/ Image Response(0.1sec)
+  Client->Server: Close(0.1sec)
+</pre>
+<p>HTTP 초기에는 연결과 종료를 매우 낭비하고 있음을 알 수 있다. 대략 모든 연결을 끝마치면 0.9초가 걸림을 알 수 있다.
+하지만 <strong>Persistent Connections</strong>를 사용한다면 아래와 같이 최적화를 할 수 있다.</p>
+<pre class="mermaid">sequenceDiagram
+  participant Client
+  participant Server
+
+  Client->Server: Connection(0.1sec)
+  Server->Client: Request/ HTML Response(0.1sec)
+  Server->Client: Request/ JavaScript Response(0.1sec)
+  Server->Client: Request/ Image Response(0.1sec)
+  Client->Server: Close(0.1sec)
+</pre>
+<p>총 시간은 앞서 Persistent Connections를 쓰지 않을 때보다 거의 반절로 줄어든 것을 알 수 있다.</p>
+<h3 class="heading" id="http-메시지">
+  HTTP 메시지
+  <a href="#http-%eb%a9%94%ec%8b%9c%ec%a7%80">#</a>
+</h3>
+<p><strong>HTTP 메시지 구조</strong></p>
+<pre tabindex="0"><code>+-------------------------+
+|     HTTP Message        |
++-------------------------+
+| Start Line              |
+| (Method, URL, Version)  |
++-------------------------+
+|                         |
+| Headers                 |
+| (Key-Value Pairs)       |
+|                         |
++-------------------------+
+| Blank Line (CRLF)       |
++-------------------------+
+|                         |
+| Body (Optional)         |
+| (e.g., JSON, HTML)      |
+|                         |
++-------------------------+
+</code></pre><p>따라서 요청 메시지는 아래와 같이 전송된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="color:#666;font-weight:bold;font-style:italic">GET</span> <span style="color:#666;font-weight:bold;font-style:italic">/search?q=hello&amp;hl=ko</span> <span style="font-weight:bold;text-decoration:underline">HTTP</span>/1.1
+</span></span><span style="display:flex;"><span>Host: www.google.com
+</span></span><span style="display:flex;"><span><span style="">#</span> Empty Line(CRLF)
+</span></span><span style="display:flex;"><span><span style="">#</span> Body
+</span></span></code></pre></div><p>서버가 Request를 받으면 응답은 아래와 같이 전송된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-http" data-lang="http"><span style="display:flex;"><span><span style="font-weight:bold;text-decoration:underline">HTTP</span>/1.1 200 OK
+</span></span><span style="display:flex;"><span>Content-Type: text/html;charset=UTF-8
+</span></span><span style="display:flex;"><span>Content-Length: 3423
+</span></span><span style="display:flex;"><span><span style="">#</span> Empty Line(CRLF)
+</span></span><span style="display:flex;"><span><span style="">&lt;html&gt;</span>
+</span></span><span style="display:flex;"><span>    &lt;body&gt; .. &lt;/body&gt;
+</span></span><span style="display:flex;"><span>&lt;/html&gt;
+</span></span></code></pre></div><p><strong>시작 라인</strong></p>
+<p>Request의 경우 start-line $\equiv$ request-line이다.</p>
+<p>$$
+\mathbf{request-line = (Method)\ SP\ (request-target)\ SP\ (HTTP-version)\ CRLF} \newline
+$$</p>
+<p>$$
+\mathbf{{GET,\ POST,\ PUT,\ DELETE} \subset  Method}
+$$</p>
+<ul>
+<li>request target
+<ul>
+<li>absolute-path[?query]의 형태를 가짐</li>
+<li><code>/query?~~</code></li>
+</ul>
+</li>
+</ul>
+<p>Response의 경우 start-line $\equiv$ status-line이다.</p>
+<p>$$
+\mathbf{status-line = (HTTP-version)\ SP\ (status-code)\ SP\ (reason-phase)\ CRLF} \newline
+$$</p>
+<p>Reason phase는 사람이 쉽게 이해할 수 있는 단문구를 말한다.</p>
+<h3 class="heading" id="http-헤더">
+  HTTP 헤더
+  <a href="#http-%ed%97%a4%eb%8d%94">#</a>
+</h3>
+<ul>
+<li>header-field = field-name:&lsquo;OWS&rsquo;field-value&rsquo;OWS&rsquo;
+<ul>
+<li>OWS = Optional White Space</li>
+</ul>
+</li>
+<li>field-name은 대소문자 구분이 없다.</li>
+<li>단, value는 대소문자 구분을 한다.</li>
+</ul>
+<p><strong>HTTP 헤더의 용도</strong></p>
+<p>헤더에는 HTTP 전송에 필요한 모든 부가정보가 들어가 있다. 메세지 바디의 내용, 크기, 압축, 인증, 요청 클라이언트(브라우저) 정보, 서버 애플리케이션 정보, 캐시 관리 정보 &hellip;</p>
+<p>표준 헤더의 경우 종류가 아주 다양하며 필요하다면 임의의 헤더를 추가 가능하다.</p>
+<h3 class="heading" id="http-메세지-바디">
+  HTTP 메세지 바디
+  <a href="#http-%eb%a9%94%ec%84%b8%ec%a7%80-%eb%b0%94%eb%94%94">#</a>
+</h3>
+<p>메세지 바디는 실전송 데이터가 들어가있다.
+바이트로 표현할 수 있는 모든 데이터를 전송할 수 있다.</p>
+<h2 class="heading" id="정리">
+  정리
+  <a href="#%ec%a0%95%eb%a6%ac">#</a>
+</h2>
+<ul>
+<li>HTTP 메시지에 모든 것을 전송</li>
+<li>HTTP/1.1을 기준으로 학습</li>
+<li>클라이언트-서버 구조</li>
+<li>Stateless protocol</li>
+<li>HTTP message</li>
+<li>단순함, 확장 가능</li>
+<li><strong>현대는 HTTP의 시대</strong></li>
+</ul>
+
+    
+  </div>
+
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
+  </script>
+  
+
+
+  
+
+  
+  
+
+<div class="single-pagination">
+    <hr />
+
+    <div class="flex">
+
+        <div class="single-pagination-prev">
+            
+            <div class="single-pagination-container-prev">
+                <div class="single-pagination-text">←</div>
+                <div class="single-pagination-text">
+                    <a href="/posts/cleaning_desktop/">
+                        바탕화면 정리
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="single-pagination-next">
+            
+        </div>
+
+    </div>
+
+    <hr />
+</div>
+
+
+
+  
+
+  
+
+  
+  <div class="back-to-top">
+    <a href="#top">
+      back to top
+    </a>
+  </div>
+  
+
+</div>
+
+
+      </main>
+    </div>
+
+    <footer>
+      
+
+    
+    <p>Powered by
+        <a href="https://gohugo.io/">Hugo</a>
+        and
+        <a href="https://github.com/tomfran/typo">tomfran/typo</a>
+    </p>
+    
+    
+    
+
+
+    </footer>
+
+    
+    <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css">
+<script defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"></script>
+
+<script defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body);"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false }
+      ]
+    });
+  });
+</script>
+    
+
+  </body>
+
+  <script>
+
+  function isAuto() {
+    return document.body.classList.contains("auto");
+  }
+
+  function setTheme() {
+    if (!isAuto()) {
+      return
+    }
+
+    document.body.classList.remove("auto");
+    let cls = "light";
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      cls = "dark";
+    }
+
+    document.body.classList.add(cls);
+  }
+
+  function invertBody() {
+    document.body.classList.toggle("dark");
+    document.body.classList.toggle("light");
+  }
+
+  if (isAuto()) {
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(invertBody);
+  }
+
+  setTheme();
+
+</script>
+
+</html>
